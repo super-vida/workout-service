@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  description: API documentation of Surcharge service.
+  title: Surcharge
+  version: "1.0"
+servers:
+  - url: https://TBD.gpe.cz
+security:
+  - httpBearer: []
+tags:
+  - description: Just for testing purposes.
+    name: Test operations
+paths:
+  /hello:
+    get:
+      deprecated: true
+      summary: Greeting for testing.
+      description: |-
+        An endpoint for testing purposes.
+      operationId: GetHello
+      tags:
+        - Test operations
+      parameters:
+        - in: query
+          name: name
+          required: false
+          schema:
+            type: string
+          description: A name which will be greet.
+      responses:
+        "200":
+          description: Successful greeting data
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/HelloResponse"
+
+components:
+  schemas:
+    HelloResponse:
+      description: A greeting response.
+      title: HelloResponse
+      type: object
+      properties:
+        greeting:
+          type: string
+        name:
+          type: string
+          description: "Same as 'name' input parameter. 'Alice', if no input name."
+          default: "Alice"
+        timestamp:
+          type: string
+          format: date-time
+      required:
+        - greeting
+        - name
+      example:
+        greeting: "Hello"
+        name: "Alice"

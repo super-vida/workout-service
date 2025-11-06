@@ -1,0 +1,19 @@
+spring:
+  config:
+    import: vault://secret/gp-webpay-surcharge, optional:consul:consul.test.internal:443
+  cloud:
+    vault:
+      uri: https://vault.test.gpe
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+springdoc:
+  api-docs:
+    enabled: true

@@ -1,0 +1,4 @@
+@Library('pay-apm-jenkins-java-pipeline-library') _
+
+releaseStart_pipeline {
+}

@@ -1,0 +1,6 @@
+@Library('pay-apm-jenkins-java-pipeline-library') _
+
+CI_pipeline {
+    tool.sonarQube.instance = 'SonarQube Ann'
+    java.artifact.id = 'gp-webpay-surcharge'
+}

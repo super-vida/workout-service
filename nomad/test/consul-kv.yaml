@@ -1,0 +1,12 @@
+---
+apiVersion: delivery.gpe.cz/v1alpha
+kind: ConsulKV
+metadata:
+  name: primary-config
+  service: gp-webpay-surcharge
+spec:
+  key: "config/gp-webpay-surcharge,test/data"
+  # language=yaml
+  value: |
+    gp-webpay-surcharge:
+      next-example-property: "example-value"

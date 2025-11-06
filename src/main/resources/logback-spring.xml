@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="applicationId" source="spring.application.name"/>
+    <springProperty scope="context" name="applicationVersion" source="spring.application.version"/>
+    <property scope="context" name="logSource" value="application"/>
+    <contextName>${applicationId}</contextName>
+
+    <springProfile name="default,local">
+        <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+        <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="dev,test,uat,prod">
+        <appender class="ch.qos.logback.core.ConsoleAppender" name="JSON_CONSOLE">
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+                <fieldNames>
+                    <timestamp>timestamp</timestamp>
+                </fieldNames>
+            </encoder>
+        </appender>
+        <root level="INFO">
+            <appender-ref ref="JSON_CONSOLE"/>
+        </root>
+    </springProfile>
+
+</configuration>

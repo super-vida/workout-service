@@ -1,0 +1,17 @@
+---
+apiVersion: delivery.gpe.cz/v1alpha
+kind: Container
+metadata:
+  name: primary-container-deployment
+  service: gp-webpay-surcharge
+  version: {{ artifactVersion }}
+  restartTag: {{ metadataRestartTag }}
+spec:
+  user: "5500"
+  image: docker-release.devrepo.globalpay.cz/gp-webpay-surcharge:{{ artifactVersion }}
+  environment:
+    SPRING_PROFILES_ACTIVE: test
+    JDK_JAVA_OPTIONS: "-Duser.timezone=UTC -Xms128m -Xmx128m -XX:+UseG1GC"
+    OPENTELEMETRY_TRACING_ENDPOINT: http://${NOMAD_IP_https}:4318/v1/traces
+  logging:
+    tag: docker.java.logback

@@ -1,0 +1,76 @@
+spring:
+  application:
+    name: gp-webpay-surcharge
+  main:
+    banner-mode: off
+  cloud:
+    consul:
+      config:
+        enabled: true
+        failFast: true
+        format: YAML
+      scheme: HTTPS
+    vault:
+      fail-fast: true
+      authentication: approle
+      app-role:
+        role-id: ${spring.application.name}
+        secret-id: ${spring.vault.approle.secret.id}
+      application-name: ${spring.application.name}
+  webflux:
+    problemdetails:
+      enabled: true
+  r2dbc:
+    pool:
+      max-idle-time: 10m
+      max-life-time: 30m
+  threads:
+    virtual:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info,health,prometheus
+  health:
+    consul:
+      enabled: false
+    vault:
+      enabled: false
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      endpoint: ${opentelemetry.tracing.endpoint}
+
+server:
+  ssl:
+    key-store: classpath:cert/keystore.p12
+    key-store-password: password
+    key-store-type: pkcs12
+    key-alias: internalinfrastructuretc (gpe bts sst root g1)
+    key-password: password
+    ciphers:
+      - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+      - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+      - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+      - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+  port: 8443
+  shutdown: graceful
+  error:
+    whitelabel:
+      enabled: false
+
+springdoc:
+  api-docs:
+    enabled: false
+
+gpe:
+  audit:
+    log:
+      component: ${spring.application.name}
+
+gp-webpay-surcharge:
+  example-property: "exampleValue"

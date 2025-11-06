@@ -1,0 +1,74 @@
+---
+apiVersion: delivery.gpe.cz/v1alpha
+kind: ServiceData
+metadata:
+  name: gp-webpay-surcharge
+spec:
+  product:
+    name: PAY
+    area: ECOM
+    description: |
+      
+      GP Webpay (PAY) is a gateway for payment methods and a management portal. It supports payment methods like
+      cards with 3D Secure, digital wallets, bank transfers, subscriptions, DCC, installments and others.
+      
+  service:
+    name: gp-webpay-surcharge
+    shortDescription: "Surcharge calculation for card payments"
+    description: |
+      
+      The `gp-webpay-surcharge` service enables all Merchants to automatically identify business cards during 
+      payment and apply a surcharge to cover extra fees. This helps Merchants save money by passing on business 
+      card fees to customers. This service provides clear information to customers about the surcharge amount and 
+      allows Merchants to manage surcharge settings in the GP Webpay portal.
+      
+    sourceCodeUrl: "https://bitbucket.gpe.cz/projects/JAVA_PAY/repos/gp-webpay-surcharge/browse"
+    labels:
+      sonarqubeKey: "cz.gpe.webpay:gp-webpay-surcharge"
+  stakeholders:
+    - Karel Jára
+    - Jindřich Zelený
+    - Lukáš Lalík
+  design: |
+    
+    The `gp-webpay-surcharge` service is a **Spring Boot** application built on the **reactive stack**, using **Spring WebFlux**.
+    
+    As described earlier, this service calculates payment surcharge based on card type and issuer. This surcharge can be
+    requested through the REST API of this service.
+    
+    **Key Components**
+    
+      - It has no key components yet...
+      - **Observability**: Integrates with **Spring Boot Actuator/Micrometer** for metrics and tracing:
+        - **Prometheus** for metrics collection
+        - **OpenTelemetry** for distributed tracing
+    
+  dependencies:
+
+  iam:
+    authn:
+      - name: Surcharge
+        description: |
+          
+          In the context of the **user payment flow** for the payment method, authentication and authorization 
+          are handled entirely by the **GP Webpay**.
+
+    authz:
+      - name: Surcharge
+        description: |
+          
+          Same as the authentication section above.
+  security:
+    sensitiveData:
+      - Card numbers
+  support:
+    contacts:
+      - email: gpwebpay@gpe.cz
+        phone: +420 603 106 000
+    probes:
+      - /actuator/health
+  downtimeImpact:
+    description: |
+      
+      `gp-webpay-surcharge` is not consumed by any other service and is not connected to other services. It is still
+      under development and not used in production. Therefore, its downtime has no impact on other services or users.

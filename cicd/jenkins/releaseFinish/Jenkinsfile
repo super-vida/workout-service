@@ -1,0 +1,6 @@
+@Library('pay-apm-jenkins-java-pipeline-library') _
+
+releaseFinish_pipeline {
+  promote.securityJenkins = "security-jenkins-vltava"
+  java.artifact.id = "gp-webpay-surcharge"
+}
