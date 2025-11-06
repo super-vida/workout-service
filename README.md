@@ -1,1 +1,1 @@
-Workout Service
+Workout Service API
