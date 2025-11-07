@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  description: API documentation of Workout service.
+  title: Workout service API
+  version: "1.0"
+servers:
+  - url: https://todo.cz
+security:
+  - httpBearer: []
+tags:
+  - description: Just for testing purposes.
+    name: Test operations
+paths:
+  /activities:
+    get:
+      summary: All activities.
+      description: |-
+        An endpoint for testing purposes.
+      operationId: GetActivities
+      tags:
+        - Test operations
+      responses:
+        "200":
+          description: All activities.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ActivityResponse"
+
+components:
+  schemas:
+    ActivityResponse:
+      description: A activity response.
+      title: ActivityResponse
+      type: object
+      properties:
+        id:
+          type: string
+          description: "Activity ID."
+        name:
+          type: string
+          description: "Activity name."
+        timestamp:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+      example:
+        id: "123456"
+        name: "Afternoon Ride"
