@@ -19,7 +19,7 @@ public class ActivityApiDelegateImpl implements ActivitiesApiDelegate {
   public Mono<ResponseEntity<Flux<ApiActivityResponse>>> getActivities(ServerWebExchange exchange) {
     log.info("getActivities api delegate called");
     ApiActivityResponse activity1 =
-        ApiActivityResponse.builder().id("777888999").name("Afternoon Workout").build();
+        ApiActivityResponse.builder().id("777888999").name("Afternoon Ride").build();
     ApiActivityResponse activity2 =
         ApiActivityResponse.builder()
             .id("444333555")
