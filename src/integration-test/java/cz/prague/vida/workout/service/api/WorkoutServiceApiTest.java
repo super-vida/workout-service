@@ -34,13 +34,13 @@ class WorkoutServiceApiTest extends AbstractIntegrationTest {
               name: "Afternoon Ride"
             }]
             """)
-//        .jsonPath("timestamp")
-//        .value(
-//            OffsetDateTime.class,
-//            t ->
-//                assertThat(t)
-//                    .isBetween(OffsetDateTime.now().minusMinutes(1), OffsetDateTime.now()))
-                        ;
+    //        .jsonPath("timestamp")
+    //        .value(
+    //            OffsetDateTime.class,
+    //            t ->
+    //                assertThat(t)
+    //                    .isBetween(OffsetDateTime.now().minusMinutes(1), OffsetDateTime.now()))
+    ;
 
     assertThat(Logging.getLogs(output))
         .anySatisfy(
