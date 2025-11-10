@@ -1,0 +1,22 @@
+spring:
+  cloud:
+    consul:
+      enabled: false
+    vault:
+      enabled: false
+
+server:
+  ssl:
+    enabled: false
+
+management:
+  otlp:
+    tracing:
+      export:
+        enabled: false
+
+opentelemetry:
+  tracing:
+    endpoint: http://localhost:${wiremock.server.port:8080}/some-tracing-endpoint/not-required
+
+
