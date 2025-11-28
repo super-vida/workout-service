@@ -30,7 +30,7 @@
     <r2dbc-proxy.version>1.1.6.RELEASE</r2dbc-proxy.version>
     <spring-boot-starter-audit-logger-logback.version>3.2.1</spring-boot-starter-audit-logger-logback.version>
     <wiremock-spring-boot.version>3.10.0</wiremock-spring-boot.version>
-    <openapi-generator-maven-plugin.version>7.14.0</openapi-generator-maven-plugin.version>
+    <openapi-generator-maven-plugin.version>7.17.0</openapi-generator-maven-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -325,10 +325,17 @@
               <configOptions>
                 <reactive>true</reactive>
                 <useSpringBoot3>true</useSpringBoot3>
+                <interfaceOnly>true</interfaceOnly>
+                <skipDefaultInterface>true</skipDefaultInterface>
                 <openApiNullable>false</openApiNullable>
-                <delegatePattern>true</delegatePattern>
                 <generateBuilders>true</generateBuilders>
               </configOptions>
+              <typeMappings>
+                <typeMapping>DateTime=Instant</typeMapping>
+              </typeMappings>
+              <importMappings>
+                <importMapping>Instant=java.time.Instant</importMapping>
+              </importMappings>
             </configuration>
           </execution>
         </executions>

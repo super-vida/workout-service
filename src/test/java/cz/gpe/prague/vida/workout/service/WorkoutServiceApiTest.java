@@ -1,0 +1,39 @@
+package cz.gpe.prague.vida.workout.service;
+
+import cz.prague.vida.workout.service.controller.ActivityApiImpl;
+import cz.prague.vida.workout.service.service.ActivityService;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.server.ServerWebExchange;
+
+@ExtendWith(MockitoExtension.class)
+class WorkoutServiceApiTest {
+
+  @Mock private ServerWebExchange serverWebExchange;
+
+  @Mock private ActivityService activityService;
+  @InjectMocks private ActivityApiImpl helloApiImpl;
+
+  @Test
+  void testActivitiesApiDelegate() {
+    var result = helloApiImpl.getActivities(serverWebExchange);
+
+    //    StepVerifier.create(result)
+    //        .assertNext(
+    //            entity -> {
+    //              assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+    //              List<ApiActivityResponse> activities = entity.getBody().collectList().block();
+    //              assertThat(activities).hasSize(2);
+    //              assertThat(activities)
+    //                  .extracting(ApiActivityResponse::getId)
+    //                  .containsExactly("777888999", "444333555");
+    //              assertThat(activities)
+    //                  .extracting(ApiActivityResponse::getName)
+    //                  .containsOnly("Afternoon Ride");
+    //            })
+    //        .verifyComplete();
+  }
+}

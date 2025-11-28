@@ -4,8 +4,10 @@ spring:
       enabled: false
     vault:
       enabled: false
-  autoconfigure:
-    exclude: org.springframework.boot.autoconfigure.r2dbc.R2dbcAutoConfiguration
+  r2dbc:
+    url: r2dbc:oracle://?oracle.r2dbc.descriptor=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)))
+    username: WORKOUT
+    password: oracle
 
 management:
   endpoints:

@@ -11,14 +11,10 @@ tags:
   - description: Just for testing purposes.
     name: Test operations
 paths:
-  /activities:
+  /activity:
     get:
       summary: All activities.
-      description: |-
-        An endpoint for testing purposes.
       operationId: GetActivities
-      tags:
-        - Test operations
       responses:
         "200":
           description: All activities.
@@ -28,7 +24,63 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ActivityResponse"
-
+    post:
+      summary: Create activity.
+      operationId: CreateActivity
+      requestBody:
+        content:
+          application/json; charset=utf-8:
+            schema:
+              $ref: "#/components/schemas/ActivityUpdate"
+        required: true
+      responses:
+        "200":
+          description: An example data
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ActivityResponse"
+  /activity/{id}:
+    get:
+      summary: Get an activity.
+      operationId: GetActivity
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: number
+          description: An activity ID.
+      responses:
+        "200":
+          description: An activity data
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ActivityResponse"
+    put:
+      summary: Update the activity.
+      operationId: UpdateActivity
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: number
+          description: An activity ID.
+      requestBody:
+        content:
+          application/json; charset=utf-8:
+            schema:
+              $ref: "#/components/schemas/ActivityUpdate"
+        required: true
+      responses:
+        "200":
+          description: An updated activity data
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: "#/components/schemas/ActivityResponse"
 components:
   schemas:
     ActivityResponse:
@@ -37,17 +89,23 @@ components:
       type: object
       properties:
         id:
-          type: string
+          type: number
           description: "Activity ID."
         name:
           type: string
           description: "Activity name."
-        timestamp:
-          type: string
-          format: date-time
       required:
         - id
         - name
       example:
         id: "123456"
         name: "Afternoon Ride"
+    ActivityUpdate:
+        type: object
+        properties:
+          name:
+            type: string
+            description: "Activity name."
+        required:
+          - id
+          - name
